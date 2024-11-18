@@ -2,10 +2,12 @@ package com.example.dev.aston.taskmanager.service;
 
 import com.example.dev.aston.taskmanager.entity.Task;
 
-public interface TaskService {
-    Task createTask(String title, boolean isCompleted);
+import java.util.Date;
 
-    Task updateTask(Long id, String title, boolean completed);
+public interface TaskService {
+    Task createTask(String title, boolean isCompleted, Date taskDoneDate);
+
+    Task updateTask(Long id, String title, boolean completed, Date taskDoneDate);
 
     Task getTaskById(long id);
 

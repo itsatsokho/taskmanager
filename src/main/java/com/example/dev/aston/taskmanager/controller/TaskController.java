@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
@@ -22,15 +24,16 @@ public class TaskController {
     @PostMapping
     public ResponseEntity<Task> createTask(@RequestBody TaskDto taskDto) {
         Task task = taskService.createTask(taskDto.getTitle(),
-                taskDto.isCompleted());
+                taskDto.isCompleted(),
+                taskDto.getTaskDoneDate());
         return ResponseEntity.status(HttpStatus.CREATED).body(task);
     }
 
     @PutMapping
-    public ResponseEntity<Task> updateTask(@RequestBody Task taskDto) {
+    public ResponseEntity<Task> updateTask(@RequestBody Task taskDto, Date taskDoneDate) {
         Task task = taskService.updateTask(taskDto.getId(),
                 taskDto.getTitle(),
-                taskDto.isCompleted());
+                taskDto.isCompleted(), taskDoneDate);
         return ResponseEntity.ok(task);
     }
 

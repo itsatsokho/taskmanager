@@ -6,6 +6,7 @@ import com.example.dev.aston.taskmanager.service.TaskService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -16,14 +17,14 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task createTask(String title, boolean isCompleted) {
-        Task task = mapTask(title, isCompleted);
+    public Task createTask(String title, boolean isCompleted, Date taskDoneDate) {
+        Task task = mapTask(title, isCompleted, taskDoneDate);
         return taskRepository.save(task);
     }
 
     @Override
-    public Task updateTask(Long id, String title, boolean isCompleted) {
-        Task task = mapTask(title, isCompleted);
+    public Task updateTask(Long id, String title, boolean isCompleted, Date taskDoneDate) {
+        Task task = mapTask(title, isCompleted, taskDoneDate);
         task.setId(id);
         return taskRepository.save(task);
     }
@@ -38,11 +39,12 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.deleteById(id);
     }
 
-    private Task mapTask(String title, boolean isCompleted) {
+    private Task mapTask(String title, boolean isCompleted, Date taskDoneDate) {
         Task task = new Task();
         task.setCompleted(isCompleted);
         task.setTitle(title);
         task.setCreationDate(LocalDate.now());
+        task.setTaskDoneDate(taskDoneDate);
         return task;
     }
 }
