@@ -19,14 +19,14 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public ResponseEntity<Task> createTask(@RequestBody TaskDto taskDto) {
         Task task = taskService.createTask(taskDto.getTitle(),
                 taskDto.isCompleted());
         return ResponseEntity.status(HttpStatus.CREATED).body(task);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @PutMapping
     public ResponseEntity<Task> updateTask(@RequestBody Task taskDto) {
         Task task = taskService.updateTask(taskDto.getId(),
                 taskDto.getTitle(),
@@ -34,14 +34,14 @@ public class TaskController {
         return ResponseEntity.ok(task);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Task> getTaskById(@PathVariable("id") long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Task> getTaskById(@PathVariable long id) {
         Task task = taskService.getTaskById(id);
         return ResponseEntity.ok(task);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void deleteTaskById(@PathVariable("id") long id) {
+    @DeleteMapping("/{id}")
+    public void deleteTaskById(@PathVariable long id) {
         taskService.deleteTaskById(id);
     }
 }
