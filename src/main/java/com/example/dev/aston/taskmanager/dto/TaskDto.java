@@ -10,6 +10,6 @@ public class TaskDto {
     private long id;
     private String title;
     private boolean isCompleted;
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date taskDoneDate;
 }
